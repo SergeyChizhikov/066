@@ -18,7 +18,7 @@ let sites = {
   "napli.ru": ["Базовые вещи про GIT", "10 самых популярных шрифтов от Google",
                "Отключение редакций и ревизий в WordPress", "Vite или Webpack?", "Вывод произвольных типов записей и полей"],
   "kiteuniverse.ru": ["Kite Universe Россия", "Красота. Грация. Интеллект", "Мастер классы Kite"],
-  "motoreforma.com": ["тюнинг CAN-AM", "Прошивки для BRP", "тюнинг Maverick X3"],
+  "motoreforma.com": ["вариатор CVTech CAN-AM", "Прошивки для CAN-AM BRP", "тюнинг Maverick X3"],
 }
 let sitesKeys = Object.keys(sites);
 let site = sitesKeys[getRandom(0, sitesKeys.length)];
@@ -26,6 +26,14 @@ let keywords = sites[site];
 let keyword = keywords[getRandom(0, keywords.length)];
 //let keyword = "Vite — отличное решение для проектов";
 let mouseClick = new MouseEvent("click");
+
+if (bingBtn !== undefined) {
+  document.cookie = `site=${site}`;
+} else if (location.hostname == "www.bing.com") {
+  site = getCookie("site");
+} else {
+  site = location.hostname;
+}
 
 //Работаем на главной странице
 if (bingBtn !== undefined) {
@@ -48,7 +56,7 @@ if (bingBtn !== undefined) {
     let linkIndex = getRandom(0, links.length);
     let localLink = links[linkIndex];
 
-    if (getRandom(0, 101) > 50) {
+    if (getRandom(0, 101) > 70) {
       location.href = "https://www.bing.com/";
     }
     if (links.length == 0) {
@@ -70,7 +78,7 @@ else if (document.querySelector(".b_scopebar") !== null){
       console.log("Нашел строку " + link);
       setTimeout(() => {
         link.click();
-      }, getRandom(3000, 5000));
+      }, getRandom(2000, 3000));
       break;
     }
   }
@@ -96,4 +104,11 @@ else if (document.querySelector(".b_scopebar") !== null){
 
 function getRandom(min,max) {
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function getCookie(name) {
+  let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
 }
