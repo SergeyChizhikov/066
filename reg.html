@@ -60,7 +60,7 @@
   <body>
     <h1 class="text-center my-5">Регистрация</h1>
     <section class="col-5 mx-auto pt-5">
-      <form action="php/reg_obr.php" method="POST">
+      <form onsubmit="sendForm(this); return false;">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <div class="input-group-text">
@@ -151,6 +151,15 @@
         </div>
       </form>
     </section>
+
+    <script>
+      async function sendForm(form) {
+        let response = await fetch("php/reg_obr.php", {
+          method: "POST",
+          body: new FormData(form),
+        });
+      }
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
