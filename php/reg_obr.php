@@ -10,7 +10,7 @@ $mysqli = mysqli_connect($host, $user, $password, $db);
 
 
 if ($mysqli == false) {
-      print("Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error());
+      print("error");
 } else {
       //print("Соединение установлено успешно");
       $name = $_POST["name"];
@@ -18,13 +18,13 @@ if ($mysqli == false) {
       $email = $_POST["email"];
       $pass = $_POST["pass"];
 
-      $result = $mysqli->query("SELECT * FROM `users` WHERE `email`='$email'");
+      $result = $mysqli->query("SELECT * FROM `users` WHERE `email`='$email' AND `pass`='$pass'");
 
       if ($result->num_rows != 0) {
-            print("Такой пользователь уже существует");
+            print("exist");
       } else {
             $mysqli->query("INSERT INTO `users`(`name`, `lastname`, `email`, `pass`) VALUES ('$name', '$lastname', '$email', '$pass')");
-            print("Пользователь успешно зарегистрирован!");
+            print("ok");
       }
 
 

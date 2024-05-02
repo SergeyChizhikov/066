@@ -136,6 +136,7 @@
           <span class="material-icons eye-icon" onmousedown="formPass.type='text'; this.nextElementSibling.hidden=false; this.hidden=true;"> visibility </span>
           <span class="material-icons eye-icon" onmouseup="formPass.type='password'; this.previousElementSibling.hidden=false; this.hidden=true;" hidden> visibility_off </span>
         </div>
+        <p id="info" style="color: red;"></p>
         <div class="form-check mb-3">
           <input class="form-check-input" type="checkbox" id="autoSizingCheck" required/>
           <label class="form-check-label" for="autoSizingCheck">
@@ -158,6 +159,14 @@
           method: "POST",
           body: new FormData(form),
         });
+
+        let result = await response.text();
+
+        if (result == "ok") {
+          alert("Вы успешно зарегистрированы!");
+        } else if (result == "exist") {
+          info.innerText = "Такой пользователь похоже уже есть";
+        }
       }
     </script>
 
