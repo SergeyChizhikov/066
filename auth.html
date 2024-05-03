@@ -16,7 +16,7 @@
       rel="stylesheet"
     />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <title>Страница регистрации</title>
+    <title>Страница авторизации</title>
     <style>
       body {
         font-family: "Ubuntu", sans-serif;
@@ -58,45 +58,9 @@
     </style>
   </head>
   <body>
-    <h1 class="text-center my-5">Регистрация</h1>
+    <h1 class="text-center my-5">Вход</h1>
     <section class="col-5 mx-auto pt-5">
       <form onsubmit="sendForm(this); return false;">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <span class="material-icons input-icon"> person_outline </span>
-            </div>
-          </div>
-          <input
-            type="text"
-            class="form-control form-control-lg"
-            placeholder="Ваше имя"
-            autocomplete="username"
-            required
-            minlength="2"
-            onfocus="this.placeholder = ''"
-            onblur="this.placeholder = 'Ваше имя'"
-            name="name"
-          />
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <span class="material-icons input-icon"> person_outline </span>
-            </div>
-          </div>
-          <input
-            type="text"
-            class="form-control form-control-lg"
-            placeholder="Ваша фамилия"
-            autocomplete="family-name"
-            required
-            minlength="3"
-            onfocus="this.placeholder = ''"
-            onblur="this.placeholder = 'Ваша фамилия'"
-            name="lastname"
-          />
-        </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <div class="input-group-text">
@@ -124,12 +88,12 @@
           <input
             type="password"
             class="form-control form-control-lg"
-            placeholder="Придумайте пароль"
-            autocomplete="new-password"
+            placeholder="Вспомните пароль"
+            autocomplete="current-password"
             required
             minlength="3"
             onfocus="this.placeholder = ''"
-            onblur="this.placeholder = 'Придумайте пароль'"
+            onblur="this.placeholder = 'Вспомните пароль'"
             id="formPass"
             name="pass"
             style="border-top-right-radius: 0.3rem; border-bottom-right-radius: 0.3rem;"
@@ -138,36 +102,30 @@
           <span class="material-icons eye-icon" onmouseup="formPass.type='password'; this.previousElementSibling.hidden=false; this.hidden=true;" hidden> visibility_off </span>
         </div>
         <p id="info" style="color: red;"></p>
-        <div class="form-check mb-3">
-          <input class="form-check-input" type="checkbox" id="autoSizingCheck" required/>
-          <label class="form-check-label" for="autoSizingCheck">
-            Согласие на обработку персональных данных
-          </label>
-        </div>
         <div class="input-group">
           <input
             type="submit"
             class="btn btn-block btn-lg btn-register"
-            value="Зарегистрироваться"
+            value="Войти"
           />
         </div>
       </form>
     </section>
-      <p><a href="auth.html">На страницу входа</a></p>
+    <p><a href="reg.html">На страницу регистрации</a></p>
 
     <script>
       async function sendForm(form) {
-        let response = await fetch("php/reg_obr.php", {
+        let response = await fetch("php/auth_obr.php", {
           method: "POST",
           body: new FormData(form),
         });
 
         let result = await response.text();
 
-        if (result == "ok") {
-          alert("Вы успешно зарегистрированы!");
-        } else if (result == "exist") {
-          info.innerText = "Такой пользователь похоже уже есть";
+        if (result == "success") {
+          alert("Вы успешно авторизованы!");
+        } else if (result == "denied") {
+          info.innerText = "Неверный логин или пароль";
         }
       }
     </script>
