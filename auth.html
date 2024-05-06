@@ -50,10 +50,13 @@
         padding-left: 2.5rem;
       }
       .eye-icon {
-        margin-left: 0.5rem;
         font-size: 2rem;
         color: red;
         cursor: pointer;
+        position: absolute;
+        right: 16px;
+        top: 8px;
+        z-index: 100;
       }
     </style>
   </head>
@@ -96,22 +99,29 @@
             onblur="this.placeholder = 'Вспомните пароль'"
             id="formPass"
             name="pass"
-            style="border-top-right-radius: 0.3rem; border-bottom-right-radius: 0.3rem;"
+            style="border-top-right-radius: 0.3rem; border-bottom-right-radius: 0.3rem"
           />
-          <span class="material-icons eye-icon" onmousedown="formPass.type='text'; this.nextElementSibling.hidden=false; this.hidden=true;"> visibility </span>
-          <span class="material-icons eye-icon" onmouseup="formPass.type='password'; this.previousElementSibling.hidden=false; this.hidden=true;" hidden> visibility_off </span>
+          <span
+            class="material-icons eye-icon"
+            onmousedown="formPass.type='text'; this.nextElementSibling.hidden=false; this.hidden=true;"
+          >
+            visibility
+          </span>
+          <span
+            class="material-icons eye-icon"
+            onmouseup="formPass.type='password'; this.previousElementSibling.hidden=false; this.hidden=true;"
+            hidden
+          >
+            visibility_off
+          </span>
         </div>
-        <p id="info" style="color: red;"></p>
+        <p id="info" style="color: red"></p>
         <div class="input-group">
-          <input
-            type="submit"
-            class="btn btn-block btn-lg btn-register"
-            value="Войти"
-          />
+          <input type="submit" class="btn btn-block btn-lg btn-register" value="Войти" />
         </div>
       </form>
+      <p><a href="reg.html">На страницу регистрации</a></p>
     </section>
-    <p><a href="reg.html">На страницу регистрации</a></p>
 
     <script>
       async function sendForm(form) {
@@ -123,7 +133,7 @@
         let result = await response.text();
 
         if (result == "success") {
-          alert("Вы успешно авторизованы!");
+        location.href = "lk.php";
         } else if (result == "denied") {
           info.innerText = "Неверный логин или пароль";
         }
