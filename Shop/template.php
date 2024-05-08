@@ -23,7 +23,7 @@
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand logo_h" href="index.php"><img src="img/logo.png" alt=""></a>
+          <a class="navbar-brand logo_h" href="/"><img src="img/logo.png" alt=""></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -31,7 +31,7 @@
           </button>
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-              <li class="nav-item active"><a class="nav-link" href="index.php">Главная</a></li>
+              <li class="nav-item active"><a class="nav-link" href="/">Главная</a></li>
               <li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Магазин</a>
                 <ul class="dropdown-menu">
@@ -53,11 +53,11 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Покупателю</a>
                 <ul class="dropdown-menu">
                   <li class="nav-item"><a class="nav-link" href="/login">Вход</a></li>
-                  <li class="nav-item"><a class="nav-link" href="register.html">Регистрация</a></li>
-                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Отслеживание</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/register">Регистрация</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/tracking">Отслеживание</a></li>
                 </ul>
               </li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
             </ul>
 
             <ul class="nav-shop">
@@ -72,7 +72,7 @@
   </header>
   <!--================ End Header Menu Area =================-->
 
-  <!-- Здесь наш контент -->
+  <?php echo $content; ?>
 
   <!--================ Start footer Area  =================-->
   <footer class="footer">
