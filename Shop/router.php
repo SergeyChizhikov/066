@@ -11,8 +11,10 @@ if ($url[1] == "login") {
   $content = file_get_contents("pages/contact.html");
 } else if ($url[1] == "tracking") {
   $content = file_get_contents("pages/tracking-order.html");
+} else if ($url[1] == "users") {
+  require_once("pages/users/index.html");
 } else {
   $content = file_get_contents("pages/index.php");
 }
 
-require_once("template.php");
+if (!empty($content)) require_once("template.php");

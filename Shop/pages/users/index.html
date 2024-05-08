@@ -21,10 +21,9 @@
             role="tablist"
             aria-orientation="vertical"
           >
-
             <a
-              class="nav-link active"
-              id="v-pills-profile-tab"
+              class="nav-link"
+              id="profileTab"
               data-toggle="pill"
               href="#v-pills-profile"
               role="tab"
@@ -34,7 +33,7 @@
             >
             <a
               class="nav-link"
-              id="v-pills-messages-tab"
+              id="messagesTab"
               data-toggle="pill"
               href="#v-pills-messages"
               role="tab"
@@ -44,7 +43,7 @@
             >
             <a
               class="nav-link"
-              id="v-pills-settings-tab"
+              id="settingsTab"
               data-toggle="pill"
               href="#v-pills-settings"
               role="tab"
@@ -56,14 +55,13 @@
         </div>
         <div class="col-8">
           <div class="tab-content" id="v-pills-tabContent">
-
             <div
-              class="tab-pane fade show active"
+              class="tab-pane fade"
               id="v-pills-profile"
               role="tabpanel"
               aria-labelledby="v-pills-profile-tab"
             >
-              ...
+              Страница профиля
             </div>
             <div
               class="tab-pane fade"
@@ -71,7 +69,7 @@
               role="tabpanel"
               aria-labelledby="v-pills-messages-tab"
             >
-              ...
+              Страница сообщений
             </div>
             <div
               class="tab-pane fade"
@@ -79,7 +77,7 @@
               role="tabpanel"
               aria-labelledby="v-pills-settings-tab"
             >
-              ...
+              Страница настроек
             </div>
           </div>
         </div>
@@ -96,5 +94,41 @@
       integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      let pathname = location.pathname.split("/")[2];
+      let navLinks = document.querySelectorAll(".nav-link");
+
+      window.addEventListener("popstate", () => {
+        let pathPop = location.pathname.split("/")[2];
+        if (pathPop == "profile") {
+          $("#profileTab").tab("show");
+        } else if (pathPop == "messages") {
+          $("#messagesTab").tab("show");
+        } else if (pathPop == "settings") {
+          $("#settingsTab").tab("show");
+        }
+      });
+
+      if (pathname == "profile") {
+        $("#v-pills-profile").tab("show");
+      } else if (pathname == "messages") {
+        $("#v-pills-messages").tab("show");
+      } else if (pathname == "settings") {
+        $("#v-pills-settings").tab("show");
+      } else {
+        location.href = location.protocol + "//" + location.host;
+      }
+
+      document.getElementById(pathname + "Tab").classList.add("active");
+
+      for (let i = 0; i < navLinks.length; i++) {
+        navLinks[i].addEventListener("click", () => {
+          let page = navLinks[i].getAttribute("aria-controls").split("v-pills-")[1];
+          console.log(page);
+          history.pushState("", "", page);
+        });
+      }
+    </script>
   </body>
 </html>
