@@ -10,11 +10,29 @@
       crossorigin="anonymous"
     />
     <title>Личный кабинет пользователя магазина TopShop</title>
+    <style>
+      .nav-pills .nav-link.active {
+        background-color: #3ca0ad;
+      }
+      h2 {
+        font-weight: 700;
+        color: brown;
+      }
+      .profile-info > span:nth-child(1) {
+        font-size: 1.25rem;
+        color: brown;
+      }
+      .profile-info > span:nth-child(2) {
+        font-size: 1.2rem;
+        color: green;
+        font-style: italic;
+      }
+    </style>
   </head>
   <body>
     <div class="container mt-5">
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           <div
             class="nav flex-column nav-pills"
             id="v-pills-tab"
@@ -53,7 +71,7 @@
             >
           </div>
         </div>
-        <div class="col-8">
+        <div class="col-9">
           <div class="tab-content" id="v-pills-tabContent">
             <div
               class="tab-pane fade"
@@ -61,7 +79,21 @@
               role="tabpanel"
               aria-labelledby="v-pills-profile-tab"
             >
-              Страница профиля
+              <div class="row">
+                <div class="col-sm-4">
+                  <img
+                    src="https://img.freepik.com/free-psd/3d-illustration-bald-person-with-glasses_23-2149436184.jpg"
+                    alt="User Avatar"
+                    width="100%"
+                  />
+                </div>
+                <div class="col-sm-8">
+                  <h2><span>Фамилия и имя:</span> <span>Василий Васильев</span></h2>
+                  <h3>Инфо о себе. Рассказ пользователя.</h3>
+                  <p class="profile-info"><span>Id: </span> <span>1</span></p>
+                  <p class="profile-info"><span>Email: </span><span>vasya@mail.ru</span></p>
+                </div>
+              </div>
             </div>
             <div
               class="tab-pane fade"
@@ -69,7 +101,98 @@
               role="tabpanel"
               aria-labelledby="v-pills-messages-tab"
             >
-              Страница сообщений
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="row mb-2 border-bottom">
+                    <div class="col-12">
+                      <div class="media">
+                        <img class="mr-3 img-fluid" src="../../img/r11.jpg" alt="" />
+                        <div class="media-body">
+                          <h5 class="mt-0">Василиса Умнова</h5>
+                          <p>Надо закрывать квартал, время...</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-2 border-bottom">
+                    <div class="col-12">
+                      <div class="media">
+                        <img class="mr-3 img-fluid" src="../../img/r12.jpg" alt="" />
+                        <div class="media-body">
+                          <h5 class="mt-0">Юрий</h5>
+                          <p>На рыбалку в пятницу утром?</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-2 border-bottom">
+                    <div class="col-12">
+                      <div class="media">
+                        <img class="mr-3 img-fluid" src="../../img/r11.jpg" alt="" />
+                        <div class="media-body">
+                          <h5 class="mt-0">Леночка</h5>
+                          <p>В ресторан в пятницу же идем?</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-2 border-bottom">
+                    <div class="col-12">
+                      <div class="media">
+                        <img class="mr-3 img-fluid" src="../../img/r8.jpg" alt="" />
+                        <div class="media-body">
+                          <h5 class="mt-0">Вероника Ивановна</h5>
+                          <p>В пятницу надо проект добить!</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-2 border-bottom">
+                    <div class="col-12">
+                      <div class="media">
+                        <img class="mr-3 img-fluid" src="../../img/r9.jpg" alt="" />
+                        <div class="media-body">
+                          <h5 class="mt-0">Гриша Работа</h5>
+                          <p>Да, конечно я приеду к 10.15</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="row pl-3">
+                    <div class="col-12 border">
+                      <div class="row mb-3">
+                        <div class="col-4">
+                          <img class="img-fluid" src="../../img/r9.jpg" alt="" />
+                        </div>
+                        <div class="col-8">
+                          <h4>Гриша Работа</h4>
+                          <p>Да, конечно я приеду к 10.15</p>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-4">
+                          <img class="img-fluid" src="https://img.freepik.com/free-psd/3d-illustration-bald-person-with-glasses_23-2149436184.jpg" alt="" width="70px"/>
+                        </div>
+                        <div class="col-8">
+                          <h4>Я</h4>
+                          <p>Тебя ждать сегодня?</p>
+                        </div>
+                      </div>
+                      <div class="row">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3 pl-3">
+                    <div class="col-12 pl-0 pr-0">
+                      <textarea class="form-control" rows="3" placeholder="Текст сообщения"></textarea>
+                      <button class="btn btn-block btn-danger mt-5">Отправить</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div
               class="tab-pane fade"
