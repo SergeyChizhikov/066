@@ -2,6 +2,8 @@
 
 
 $url = explode("/", $_SERVER["REQUEST_URI"]);
+require_once("php/db.php");
+require_once("php/classes/User.php");
 
 if ($url[1] == "login") {
   $content = file_get_contents("pages/login.php");
@@ -13,6 +15,8 @@ if ($url[1] == "login") {
   $content = file_get_contents("pages/tracking-order.html");
 } else if ($url[1] == "users") {
   require_once("pages/users/index.html");
+} else if ($url[1] == "regUser") {
+  User::addUser();
 } else {
   $content = file_get_contents("pages/index.php");
 }
