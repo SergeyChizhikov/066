@@ -53,6 +53,38 @@ class User
   //Статический метод авторизации пользователя
   static function authUser($email, $pass) {
     global $mysqli;
-    return;
+
+    $email = mb_strtolower(trim($email));
+    $pass = trim($pass);
+
+    $result = $mysqli->query("SELECT * FROM `users` WHERE `email`='$email'");
+    $result = $result->fetch_assoc();
+
+    if (password_verify($pass, $result["pass"])) {
+      $_SESSION["id"] = $result["id"];
+      return json_encode(["result" => "ok"]);
+    } else {
+      return json_encode(["result" => "denied"]);
+    }
+
+  }
+
+  //Статический метод получения данных пользователя
+  static function getUser($userId) {
+    global $mysqli;
+    $result = $mysqli->query("SELECT * FROM `users` WHERE `id`='$userId'");
+    $result = $result->fetch_assoc();
+    return json_encode($result);
+  }
+
+  //Статический метод получения всех пользователей
+  static function getUsers() {
+    global $mysqli;
+    $result = $mysqli->query("SELECT `name`, `lastname`, `email`, `id` FROM `users` WHERE 1");
+
+    while($row = $result->fetch_assoc()) {
+      $users[] = $row;
+    }
+    return json_encode($users);
   }
 }
