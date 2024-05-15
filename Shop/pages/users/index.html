@@ -88,10 +88,19 @@
                   />
                 </div>
                 <div class="col-sm-8">
-                  <h2><span>Фамилия и имя:</span> <span>Василий Васильев</span></h2>
+                  <h2>
+                    <span>Фамилия и имя:</span>
+                    <span id="userName"></span>
+                  </h2>
                   <h3>Инфо о себе. Рассказ пользователя.</h3>
-                  <p class="profile-info"><span>Id: </span> <span>1</span></p>
-                  <p class="profile-info"><span>Email: </span><span>vasya@mail.ru</span></p>
+                  <p class="profile-info">
+                    <span>Id: </span>
+                    <span id="userId"></span>
+                  </p>
+                  <p class="profile-info">
+                    <span>Email: </span>
+                    <span id="userEmail"></span>
+                  </p>
                 </div>
               </div>
             </div>
@@ -173,21 +182,28 @@
                       </div>
                       <div class="row mb-3">
                         <div class="col-4">
-                          <img class="img-fluid" src="https://img.freepik.com/free-psd/3d-illustration-bald-person-with-glasses_23-2149436184.jpg" alt="" width="70px"/>
+                          <img
+                            class="img-fluid"
+                            src="https://img.freepik.com/free-psd/3d-illustration-bald-person-with-glasses_23-2149436184.jpg"
+                            alt=""
+                            width="70px"
+                          />
                         </div>
                         <div class="col-8">
                           <h4>Я</h4>
                           <p>Тебя ждать сегодня?</p>
                         </div>
                       </div>
-                      <div class="row">
-
-                      </div>
+                      <div class="row"></div>
                     </div>
                   </div>
                   <div class="row mt-3 pl-3">
                     <div class="col-12 pl-0 pr-0">
-                      <textarea class="form-control" rows="3" placeholder="Текст сообщения"></textarea>
+                      <textarea
+                        class="form-control"
+                        rows="3"
+                        placeholder="Текст сообщения"
+                      ></textarea>
                       <button class="btn btn-block btn-danger mt-5">Отправить</button>
                     </div>
                   </div>
@@ -200,7 +216,21 @@
               role="tabpanel"
               aria-labelledby="v-pills-settings-tab"
             >
-              Страница настроек
+              <div class="row mt-5">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Имя</th>
+                      <th scope="col">Фамилия</th>
+                      <th scope="col">Email</th>
+                    </tr>
+                  </thead>
+                  <tbody id="usersTable">
+                    <!-- Тут формируем табличные строки -->
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -221,6 +251,16 @@
     <script>
       let pathname = location.pathname.split("/")[2];
       let navLinks = document.querySelectorAll(".nav-link");
+      //let user;
+
+      async function getUser() {
+        let response = await fetch("/getUser");
+        return await response.json();
+      }
+      async function getUsers() {
+        let response = await fetch("/getUsers");
+        return await response.json();
+      }
 
       window.addEventListener("popstate", () => {
         let pathPop = location.pathname.split("/")[2];
@@ -234,10 +274,30 @@
       });
 
       if (pathname == "profile") {
+        getUser().then((user) => {
+          userName.innerText = `${user.lastname} ${user.name}`;
+          userId.innerText = `${user.id}`;
+          userEmail.innerText = `${user.email}`;
+        });
+
         $("#v-pills-profile").tab("show");
       } else if (pathname == "messages") {
         $("#v-pills-messages").tab("show");
       } else if (pathname == "settings") {
+        getUsers().then((users) => {
+          for (let i = 0; i < users.length; i++) {
+            usersTable.insertAdjacentHTML(
+              "beforebegin",
+              ` <tr>
+                 <th scope="row">${users[i].id}</th>
+                 <td>${users[i].name}</td>
+                 <td>${users[i].lastname}</td>
+                 <td>${users[i].email}</td>
+              </tr>
+            `
+            );
+          }
+        });
         $("#v-pills-settings").tab("show");
       } else {
         location.href = location.protocol + "//" + location.host;
